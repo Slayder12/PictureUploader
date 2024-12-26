@@ -44,23 +44,23 @@ class MainActivity : AppCompatActivity() {
                 RetrofitInstance.api.getRandomDog()
             } catch (e: IOException) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@MainActivity, "Ошибка сети: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Ошибка сети: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
                 return@launch
             } catch (e: HttpException) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@MainActivity, "Ошибка сервера: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Ошибка сервера: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
                 return@launch
             }
 
             if (response.url.endsWith(".mp4") || response.url.endsWith(".webm")) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@MainActivity, "Получен видео файл. Нажмите загрузить ещё раз.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Получен видео файл. Нажмите загрузить ещё раз.", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 withContext(Dispatchers.Main) {
-                    Glide.with(this@MainActivity)
+                    Glide.with(applicationContext)
                         .load(response.url)
                         .into(imageView)
                 }
